@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Logo from './companionImg.png';
 
@@ -34,9 +34,10 @@ const NavLink = styled.a`
 `;
 
 const Main = styled.div`
-  max-width: 900px;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
+  height: ${props => props.mainHeight}px;
   margin: 0 auto;
 `;
 
@@ -47,6 +48,7 @@ const Title = styled.h1`
 
 const ChatWrapper = styled.div`
   display: flex;
+  flex-grow: 1;
   background-color: rgba(255,255,255,0.81);
 `;
 
@@ -54,11 +56,13 @@ const Dialogs = styled.div`
   display: flex;
   flex-direction: column;
   width: 35%;
-  padding: 10px 5px;
+  border-right: 1px solid #bfbfbf;
 `;
 
 const HistoryWrapper = styled.div`
-  
+  width: 65%;
+  padding: 0 75px;
+  background-color: #fff;
 `;
 
 const History = styled.div``;
@@ -66,19 +70,38 @@ const History = styled.div``;
 const MessageItem = styled.div`
   display: flex;
   align-items: center;
+  padding: 10px 0px 10px 15px;
+
+  &:first-child {
+    padding-top: 10px;
+  }
+
+  &:hover {
+    background: #bfbfbf;
+  }
 `;
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 100%;
+`;
+
+const ContentWrappper = styled.div`
+  display: flex;
+  width: calc(100% - 50px);
+  padding: 0 10px;
 `;
 
 const CompanionName = styled.span`
   font-weight: bold;
 `;
 
-const Message = styled.p``;
+const Message = styled.p`
+  margin: 0 10px 0 0;
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+`;
 
 const MessageTime = styled.span`
   align-self: flex-start;
@@ -87,8 +110,8 @@ const MessageTime = styled.span`
 const MessageForm = styled.form``;
 
 const IconWrapper = styled.div`
-  width: 75px;
-  height: 75px;
+  width: 50px;
+  height: 50px;
   overflow: hidden;
   border-radius: 50%;
 `;
@@ -99,33 +122,103 @@ const Icon = styled.img`
   margin: 0 auto;
 `;
 
-const links = ['Features','Enterprise','Support','Pricing','Sign up'];
+const links = ['Features', 'Enterprise', 'Support', 'Pricing', 'Sign up'];
+
 
 function App() {
+  const [mainHeight, setMainHeight] = useState(0); 
+
+  useEffect(() => {
+    const bodyHeight = document.body.clientHeight;
+    const headerHeight = document.getElementById('header').clientHeight;
+    console.log(bodyHeight);
+    setMainHeight(bodyHeight - headerHeight - 20);
+  })
   return (
     <AppWrapper>
-      <Header>
+      <Header id="header">
         <Nav>
           {links.map(item => <NavItem><NavLink href="https://google.com">{item}</NavLink></NavItem>)}
         </Nav>
       </Header>
-      <Main>
+      <Main mainHeight={mainHeight}>
         <ChatWrapper>
           <Dialogs>
             <MessageItem>
               <IconWrapper>
-                <Icon src={Logo}/>
+                <Icon src={Logo} />
               </IconWrapper>
-              <Content>
-                <CompanionName>Peter</CompanionName>
-                <Message>Hello my dear friend. I called you 2 hours ago.</Message>
-              </Content>
-              <MessageTime>16:00</MessageTime>
+              <ContentWrappper>
+                <Content>
+                  <CompanionName>Peter</CompanionName>
+                  <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                </Content>
+                <MessageTime>16:00</MessageTime>
+              </ContentWrappper>
+            </MessageItem>
+            <MessageItem>
+              <IconWrapper>
+                <Icon src={Logo} />
+              </IconWrapper>
+              <ContentWrappper>
+                <Content>
+                  <CompanionName>Peter</CompanionName>
+                  <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                </Content>
+                <MessageTime>16:00</MessageTime>
+              </ContentWrappper>
+            </MessageItem>
+            <MessageItem>
+              <IconWrapper>
+                <Icon src={Logo} />
+              </IconWrapper>
+              <ContentWrappper>
+                <Content>
+                  <CompanionName>Peter</CompanionName>
+                  <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                </Content>
+                <MessageTime>16:00</MessageTime>
+              </ContentWrappper>
             </MessageItem>
           </Dialogs>
           <HistoryWrapper>
             <History>
-              <MessageItem />
+            <MessageItem>
+              <IconWrapper>
+                <Icon src={Logo} />
+              </IconWrapper>
+              <ContentWrappper>
+                <Content>
+                  <CompanionName>Peter</CompanionName>
+                  <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                </Content>
+                <MessageTime>16:00</MessageTime>
+              </ContentWrappper>
+            </MessageItem>
+            <MessageItem>
+              <IconWrapper>
+                <Icon src={Logo} />
+              </IconWrapper>
+              <ContentWrappper>
+                <Content>
+                  <CompanionName>Peter</CompanionName>
+                  <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                </Content>
+                <MessageTime>16:00</MessageTime>
+              </ContentWrappper>
+            </MessageItem>
+            <MessageItem>
+              <IconWrapper>
+                <Icon src={Logo} />
+              </IconWrapper>
+              <ContentWrappper>
+                <Content>
+                  <CompanionName>Peter</CompanionName>
+                  <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                </Content>
+                <MessageTime>16:00</MessageTime>
+              </ContentWrappper>
+            </MessageItem>
             </History>
             <MessageForm>
 
