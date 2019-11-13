@@ -1,6 +1,16 @@
 import React, {useState, useEffect} from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import styled from 'styled-components';
+import io from 'socket.io-client';
 import Logo from './companionImg.png';
+import AuthorizationPage from "./components/authorizationPage/AuthorizationPage";
+
+const socket = io('http://localhost:8000');
 
 const AppWrapper = styled.div`
   height: 100vh;
@@ -191,113 +201,120 @@ function App() {
 
   useEffect(() => {
     const bodyHeight = document.body.clientHeight;
-    const headerHeight = document.getElementById('header').clientHeight;
-    console.log(bodyHeight);
+    const headerElement = document.getElementById('header');
+    const headerHeight = headerElement ? headerElement.clientHeight : 0;
     setMainHeight(bodyHeight - headerHeight - 20);
   }, []);
 
   return (
     <AppWrapper>
-      <Header id="header">
-        <Nav>
-          {links.map(item => <NavItem><NavLink href="https://google.com">{item}</NavLink></NavItem>)}
-        </Nav>
-      </Header>
-      <Main mainHeight={mainHeight}>
-        <ChatWrapper>
-          <Dialogs>
-            <MessageItem>
-              <IconWrapper>
-                <Icon src={Logo}/>
-              </IconWrapper>
-              <ContentWrappper>
-                <Content>
-                  <CompanionName>Peter</CompanionName>
-                  <Message>Hello my dear friend. I called you 2 hours ago.</Message>
-                </Content>
-                <MessageTime>16:00</MessageTime>
-              </ContentWrappper>
-            </MessageItem>
-            <MessageItem>
-              <IconWrapper>
-                <Icon src={Logo}/>
-              </IconWrapper>
-              <ContentWrappper>
-                <Content>
-                  <CompanionName>Peter</CompanionName>
-                  <Message>Hello my dear friend. I called you 2 hours ago.</Message>
-                </Content>
-                <MessageTime>16:00</MessageTime>
-              </ContentWrappper>
-            </MessageItem>
-            <MessageItem>
-              <IconWrapper>
-                <Icon src={Logo}/>
-              </IconWrapper>
-              <ContentWrappper>
-                <Content>
-                  <CompanionName>Peter</CompanionName>
-                  <Message>Hello my dear friend. I called you 2 hours ago.</Message>
-                </Content>
-                <MessageTime>16:00</MessageTime>
-              </ContentWrappper>
-            </MessageItem>
-          </Dialogs>
-          <HistoryWrapper>
-            <History>
-              <MessageItem>
-                <IconWrapper>
-                  <Icon src={Logo}/>
-                </IconWrapper>
-                <ContentWrappper>
-                  <Content>
-                    <CompanionName>Peter</CompanionName>
-                    <Message>Hello my dear friend. I called you 2 hours ago.</Message>
-                  </Content>
-                  <MessageTime>16:00</MessageTime>
-                </ContentWrappper>
-              </MessageItem>
-              <MessageItem>
-                <IconWrapper>
-                  <Icon src={Logo}/>
-                </IconWrapper>
-                <ContentWrappper>
-                  <Content>
-                    <CompanionName>Peter</CompanionName>
-                    <Message>Hello my dear friend. I called you 2 hours ago.</Message>
-                  </Content>
-                  <MessageTime>16:00</MessageTime>
-                </ContentWrappper>
-              </MessageItem>
-              <MessageItem>
-                <IconWrapper>
-                  <Icon src={Logo}/>
-                </IconWrapper>
-                <ContentWrappper>
-                  <Content>
-                    <CompanionName>Peter</CompanionName>
-                    <Message>Hello my dear friend. I called you 2 hours ago.</Message>
-                  </Content>
-                  <MessageTime>16:00</MessageTime>
-                </ContentWrappper>
-              </MessageItem>
-            </History>
-            <MessageFormWrapper>
-              <IconWrapper>
-                <Icon src={Logo}/>
-              </IconWrapper>
-              <MessageForm>
-                <Textarea />
-                <Submit>Send</Submit>
-              </MessageForm>
-              <IconWrapper>
-                <Icon src={Logo}/>
-              </IconWrapper>
-            </MessageFormWrapper>
-          </HistoryWrapper>
-        </ChatWrapper>
-      </Main>
-    </AppWrapper>
+      <Router>
+        <Route path="/authorization">
+          <AuthorizationPage />
+        </Route>
+        <Route path="/main">
+          <Header id="header">
+            <Nav>
+              {links.map(item => <NavItem><NavLink href="https://google.com">{item}</NavLink></NavItem>)}
+            </Nav>
+          </Header>
+          <Main mainHeight={mainHeight}>
+            <ChatWrapper>
+              <Dialogs>
+                <MessageItem>
+                  <IconWrapper>
+                    <Icon src={Logo}/>
+                  </IconWrapper>
+                  <ContentWrappper>
+                    <Content>
+                      <CompanionName>Peter</CompanionName>
+                      <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                    </Content>
+                    <MessageTime>16:00</MessageTime>
+                  </ContentWrappper>
+                </MessageItem>
+                <MessageItem>
+                  <IconWrapper>
+                    <Icon src={Logo}/>
+                  </IconWrapper>
+                  <ContentWrappper>
+                    <Content>
+                      <CompanionName>Peter</CompanionName>
+                      <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                    </Content>
+                    <MessageTime>16:00</MessageTime>
+                  </ContentWrappper>
+                </MessageItem>
+                <MessageItem>
+                  <IconWrapper>
+                    <Icon src={Logo}/>
+                  </IconWrapper>
+                  <ContentWrappper>
+                    <Content>
+                      <CompanionName>Peter</CompanionName>
+                      <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                    </Content>
+                    <MessageTime>16:00</MessageTime>
+                  </ContentWrappper>
+                </MessageItem>
+              </Dialogs>
+              <HistoryWrapper>
+                <History>
+                  <MessageItem>
+                    <IconWrapper>
+                      <Icon src={Logo}/>
+                    </IconWrapper>
+                    <ContentWrappper>
+                      <Content>
+                        <CompanionName>Peter</CompanionName>
+                        <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                      </Content>
+                      <MessageTime>16:00</MessageTime>
+                    </ContentWrappper>
+                  </MessageItem>
+                  <MessageItem>
+                    <IconWrapper>
+                      <Icon src={Logo}/>
+                    </IconWrapper>
+                    <ContentWrappper>
+                      <Content>
+                        <CompanionName>Peter</CompanionName>
+                        <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                      </Content>
+                      <MessageTime>16:00</MessageTime>
+                    </ContentWrappper>
+                  </MessageItem>
+                  <MessageItem>
+                    <IconWrapper>
+                      <Icon src={Logo}/>
+                    </IconWrapper>
+                    <ContentWrappper>
+                      <Content>
+                        <CompanionName>Peter</CompanionName>
+                        <Message>Hello my dear friend. I called you 2 hours ago.</Message>
+                      </Content>
+                      <MessageTime>16:00</MessageTime>
+                    </ContentWrappper>
+                  </MessageItem>
+                </History>
+                <MessageFormWrapper>
+                  <IconWrapper>
+                    <Icon src={Logo}/>
+                  </IconWrapper>
+                  <MessageForm>
+                    <Textarea />
+                    <Submit>Send</Submit>
+                  </MessageForm>
+                  <IconWrapper>
+                    <Icon src={Logo}/>
+                  </IconWrapper>
+                </MessageFormWrapper>
+              </HistoryWrapper>
+            </ChatWrapper>
+          </Main>
+        </Route>
+      </Router>
+     </AppWrapper>
   );
 }
 
