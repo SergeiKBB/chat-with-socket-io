@@ -212,7 +212,7 @@ function App() {
         <Route path="/authorization">
           <AuthorizationPage />
         </Route>
-        <Route path="/main">
+        <Route path="/" exact>
           <Header id="header">
             <Nav>
               {links.map(item => <NavItem><NavLink href="https://google.com">{item}</NavLink></NavItem>)}
