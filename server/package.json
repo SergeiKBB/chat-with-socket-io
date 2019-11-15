@@ -4,13 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "PORT=8000 nodemon --exec babel-node index.js",
+    "start": "nodemon --exec babel-node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Serhii Khomych <sergei.x75v@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "errorhandler": "^1.5.1",
     "express": "^4.17.1",
+    "mongoose": "^5.7.10",
+    "passport": "^0.4.0",
+    "passport-http-bearer": "^1.0.1",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {

@@ -1,0 +1,26 @@
+{
+  "name": "chat-with-socket-io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:frontend": "cd ./frontend && npm start",
+    "start:server": "cd ./server && npm start",
+    "start:all": "npm-run-all --parallel start:frontend start:server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergeiKBB/chat-with-socket-io.git"
+  },
+  "author": "Serhii Khomych <sergei.x75v@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SergeiKBB/chat-with-socket-io/issues"
+  },
+  "homepage": "https://github.com/SergeiKBB/chat-with-socket-io#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "npm-run-all": "^4.1.5"
+  }
+}

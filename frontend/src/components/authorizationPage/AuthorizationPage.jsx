@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import {login} from "../../api";
 
 
 const FormWrapper = styled.div`
@@ -70,24 +72,30 @@ const Submit = styled.button`
 `;
 
 const AuthorizationPage = props => {
-  const [login, setLogin] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  const handleSubmit = () => {
-    const data = {
-      
-    }
-  }
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const data = { email, password };
+    console.log(data);
+    const response = await login(data);
+    if (response.status === 200) setShouldRedirect(true)
+  };
+  const handleEmailInput = event => setEmail(event.target.value);
+  const handlePasswordInput = event => setPassword(event.target.value);
   return (
     <FormWrapper>
-      <AuthorizationForm>
+      <AuthorizationForm onSubmit={handleSubmit}>
         <FormTitle>Please, login!</FormTitle>
-        <FormInput placeholder="login" />
-        <FormInput placeholder="password" />
+        <FormInput placeholder="login" onChange={handleEmailInput}/>
+        <FormInput placeholder="password" onChange={handlePasswordInput}/>
         <Submit>Submit</Submit>
+        {shouldRedirect ? <Redirect to="/" /> : null}
       </AuthorizationForm>
     </FormWrapper>
   );
-}
+};
 
 export default AuthorizationPage;
